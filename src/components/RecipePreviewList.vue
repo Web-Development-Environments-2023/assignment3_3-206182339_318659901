@@ -1,14 +1,22 @@
 <template>
   <b-container>
-    <h3>
-      {{ title }}:
+    <center>
+    <h3 class="big-title text-center" >
+        {{ title }}
       <slot></slot>
     </h3>
-    <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
-      </b-col>
-    </b-row>
+    </center>
+   <center>
+    <h1  v-if="no_recipe">
+      <br/>
+      <br/>
+      There Are No {{ title }}</h1>
+      </center>
+    <center>
+    <b-col v-for="r in recipes" :key="r.id">
+      <RecipePreview class="recipePreview" :recipe="r" :title="title" :route_name="route_name" style="margin-left:205px;"/>
+    </b-col>
+     </center>
   </b-container>
 </template>
 
@@ -23,11 +31,16 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    route_name:{
+      type: String,
+      required: true    
     }
   },
   data() {
     return {
-      recipes: []
+      recipes: [],
+      no_recipe: false
     };
   },
   mounted() {
@@ -37,15 +50,29 @@ export default {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-          this.$root.store.server_domain + "/recipes/random",
-          // "https://test-for-3-2.herokuapp.com/recipes/random"
+          this.$root.store.server_domain + this.route_name,
         );
-
-        // console.log(response);
-        const recipes = response.data.recipes;
+        if(response.data.length === 0) {
+          this.no_recipe = true;
+        }
+        const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
-        // console.log(this.recipes);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async updateRandomRecipes() {
+      try {
+        const response = await this.axios.get(
+          this.$root.store.server_domain + "/recipes/randomRecipes",
+        );
+        if(response.data.length === 0) {
+          this.no_recipe = true;
+        }
+        const recipes = response.data;
+        this.recipes = [];
+        this.recipes.push(...recipes);
       } catch (error) {
         console.log(error);
       }
@@ -56,6 +83,15 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  min-height: 400px;
+  min-height: 80px;
 }
+
+.big-title{
+
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  color:#0f4e9f; 
+  text-shadow: -1px 0 black, 0 3px black, 1px 0 black, 0 -1px black;
+  font-size: 48px;
+}
+
 </style>

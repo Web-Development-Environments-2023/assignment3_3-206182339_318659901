@@ -103,3 +103,6 @@ new Vue({
   },
   render: (h) => h(App),
 }).$mount("#app");
+    // "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    // "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+    // "lint": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service lint"
