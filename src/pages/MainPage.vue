@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div id="welcome" align="center" justify="center">Welcome to Recipes Website</div>
-    <b-row>
+    
+    <div id="welcome" align="center" justify="center"><img src="..\assets\logowelcome.png" width = "400" height = "300" /></div>    <b-row>
       <b-col  class="RandomRecipesCol">
         <RecipePreviewList route_name="/recipes/randomRecipes" title="Random Recipes" class="RandomRecipes center" />
         <b-button tag="button" pill @click="new_random_recipes"
@@ -80,7 +80,7 @@ img {
   // border-radius: 1px;
 }
 .title{
-  color:#2919d1;
+  color:#4235cf;
   font-weight: bolder;
 
 }

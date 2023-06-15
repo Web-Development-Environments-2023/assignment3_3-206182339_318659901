@@ -23,7 +23,7 @@ const routes = [
     component: () => import("./pages/SearchPage"),
   },
   {
-    path: "/recipe/:recipeId",
+    path: "/route_name/:route_name/recipe/:recipeId",
     name: "recipe",
     component: () => import("./pages/RecipeViewPage"),
   },
@@ -47,6 +47,17 @@ const routes = [
     name: "familyRecipes",
     component: () => import("./pages/FamilyRecipesPage"),
   },
+  {
+    path: "/MyRecipes",
+    name: "MyRecipesPage",
+    component: () => import("./pages/MyRecipesPage"),
+  },
+  {
+    path: "/CreateRecipe",
+    name: "create",
+    component: () => import("./pages/CreateRecipePage"),
+  },
+
 ];
 
 export default routes;

@@ -6,7 +6,7 @@
           <div class="navbar-collapse">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'main' }">Recipes</router-link>
+                <router-link class="nav-link" :to="{ name: 'main' }">Home</router-link>
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'search' }">Search</router-link>
@@ -28,7 +28,7 @@
               </li>
               <li class="nav-item">
                 <div v-if="$root.store.username" class="text-end me-3">
-                  <button class="btn btn-link" @click="Favorites">Favorites</button>
+                  <router-link class="nav-link" :to="{ name: 'create' }">Create Recipe</router-link>
                 </div>
               </li>
               <li class="nav-item">
@@ -40,7 +40,7 @@
                 </a>
                 <ul class="nav-link dropdown-menu" aria-labelledby="privateAreaDropdown" v-if="isDropdownOpen">
                   <li><router-link class="nav-link dropdown-item" :to="{ name: 'favorites' }">My Favorites</router-link></li>
-                  <li><router-link class="nav-link dropdown-item" :to="{ name: 'recipe' }">My Recipes</router-link></li>
+                  <li><router-link class="nav-link dropdown-item" :to="{ name: 'MyRecipesPage' }">My Recipes</router-link></li>
                   <li><router-link class="nav-link dropdown-item" :to="{ name: 'familyRecipes' }">My Family Recipes</router-link></li>
                 </ul>
               </li>
@@ -82,12 +82,7 @@ export default {
       });
     },
     isLoggedIn(){return $root.store.username;},
-    Favorites(){
-      //TODO
-    },
-    LastViewed(){
-      //TODO
-    },
+
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
@@ -120,7 +115,7 @@ export default {
     font-size: 30px;
     font-weight: 50;
     border: 2px solid #ccd5d9;
-    background-color:mediumpurple;
+    background-color:rgb(112, 147, 216);
     padding: 10px 10px;
     cursor: pointer;
     border-radius: 10px;
@@ -133,12 +128,12 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  color:mediumpurple;
+  color:rgb(112, 185, 216);
 }
 
 
 .displayUser {
-    color: mediumpurple;
+    color: rgb(112, 143, 216);
     margin-left: auto;
     width: 10%;
     padding: 10px;
