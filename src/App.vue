@@ -1,25 +1,77 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
-      {{ !$root.store.username }}
-      <span v-if="!$root.store.username">
-        Guest:
-        <router-link :to="{ name: 'register' }">Register</router-link>|
-        <router-link :to="{ name: 'login' }">Login</router-link>|
-      </span>
-      <span v-else>
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
-      </span>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <div class="navbar-collapse">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <router-link class="nav-link" :to="{ name: 'main' }">Recipes</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" :to="{ name: 'search' }">Search</router-link>
+              </li>
+              <li class="nav-item">
+                <div v-if="!$root.store.username" class="text-end me-3">
+                  <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div v-if="!$root.store.username" class="text-end me-3">
+                  <router-link class="nav-link" :to="{ name: 'login' }">Login</router-link>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div v-if="$root.store.username" class="text-end me-3">
+                  <button class="btn btn-link" @click="Logout">Logout</button>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div v-if="$root.store.username" class="text-end me-3">
+                  <button class="btn btn-link" @click="Favorites">Favorites</button>
+                </div>
+              </li>
+              <li class="nav-item">
+                  <router-link class="nav-link" :to="{ name: 'about' }">About</router-link>
+              </li>
+              <li v-if="$root.store.username" class="nav-item dropdown" ref="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="privateAreaDropdown" role="button" :aria-expanded="isDropdownOpen.toString()" @click="toggleDropdown">
+                  Private Area
+                </a>
+                <ul class="nav-link dropdown-menu" aria-labelledby="privateAreaDropdown" v-if="isDropdownOpen">
+                  <li><router-link class="nav-link dropdown-item" :to="{ name: 'favorites' }">My Favorites</router-link></li>
+                  <li><router-link class="nav-link dropdown-item" :to="{ name: 'recipe' }">My Recipes</router-link></li>
+                  <li><router-link class="nav-link dropdown-item" :to="{ name: 'familyRecipes' }">My Family Recipes</router-link></li>
+                </ul>
+              </li>
+            </ul>
+
+            <div class="d-flex justify-content-end align-items-center">
+              <div v-if="!$root.store.username" class="displayUser text-end me-3">Hello Guest</div>
+              <div v-else class="displayUser text-end me-3">{{ $root.store.username }}</div>
+            </div> 
+          </div>
+        </div>
+      </nav>
     </div>
     <router-view />
   </div>
 </template>
 
 <script>
-export default {
+export default {   
   name: "App",
+  data() {
+    return {
+      isDropdownOpen: false,
+    };
+  },
+  mounted() {
+    document.addEventListener("click", this.handleOutsideClick);
+  },
+  beforeUnmount() {
+    document.removeEventListener("click", this.handleOutsideClick);
+  },
   methods: {
     Logout() {
       this.$root.store.logout();
@@ -28,6 +80,22 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
+    },
+    isLoggedIn(){return $root.store.username;},
+    Favorites(){
+      //TODO
+    },
+    LastViewed(){
+      //TODO
+    },
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    },
+    handleOutsideClick(event) {
+      const dropdownElement = this.$refs.dropdown;
+      if (!dropdownElement.contains(event.target)) {
+        this.isDropdownOpen = false;
+      }
     }
   }
 };
@@ -44,8 +112,19 @@ export default {
   min-height: 100vh;
 }
 
+
 #nav {
   padding: 30px;
+    letter-spacing: 2px;
+    color: white;
+    font-size: 30px;
+    font-weight: 50;
+    border: 2px solid #ccd5d9;
+    background-color:mediumpurple;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    animation: fadeIn 1s ease-in forwards;
 }
 
 #nav a {
@@ -54,6 +133,16 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color:mediumpurple;
 }
+
+
+.displayUser {
+    color: mediumpurple;
+    margin-left: auto;
+    width: 10%;
+    padding: 10px;
+    background-color: #f8f9fa;
+    text-align: right;
+  }
 </style>
