@@ -1,7 +1,8 @@
 <template>
-  <div class="container">
-    
-    <div id="welcome" align="center" justify="center"><img src="..\assets\logowelcome.png" width = "400" height = "300" /></div>    <b-row>
+  <div class="container"> 
+    <div id="welcome" align="center" justify="center"><img src="../assets/logowelcome.png" width = "400" height = "300" /></div> 
+    <!-- <div id="welcome" align="center" justify="center"><img src="../assets/logowelcome.png" width = "400" height = "300" /></div>  -->
+      <b-row> 
       <b-col  class="RandomRecipesCol">
         <RecipePreviewList route_name="/recipes/randomRecipes" title="Random Recipes" class="RandomRecipes center" />
         <b-button tag="button" pill @click="new_random_recipes"
