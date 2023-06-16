@@ -33,7 +33,7 @@ const routes = [
     component: NotFound,
   },
   {
-    path: "/favorites",
+    path: "/users/favorites",
     name: "favorites",
     component: () => import("./pages/FavoritesPage"),
   },
@@ -43,20 +43,20 @@ const routes = [
     component: () => import("./pages/AboutPage"),
   },
   {
-    path: "/familyRecipes",
+    path: "users/familyRecipes",
     name: "familyRecipes",
     component: () => import("./pages/FamilyRecipesPage"),
   },
-  {
-    path: "/MyRecipes",
-    name: "MyRecipesPage",
-    component: () => import("./pages/MyRecipesPage"),
-  },
-  {
-    path: "/CreateRecipe",
-    name: "create",
-    component: () => import("./pages/CreateRecipePage"),
-  },
+  // {
+  //   path: "/MyRecipes",
+  //   name: "MyRecipesPage",
+  //   component: () => import("./pages/MyRecipesPage"),
+  // },
+  // {
+  //   path: "/CreateRecipe",
+  //   name: "create",
+  //   component: () => import("./pages/CreateRecipePage"),
+  // },
 
 ];
 

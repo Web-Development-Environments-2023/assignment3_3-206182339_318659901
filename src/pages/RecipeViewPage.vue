@@ -72,7 +72,11 @@ methods: {
        if(split_route == "lastViewedRecipes" || split_route =="randomRecipes" || split_route =="favorites" || split_route =="search"){
         this.API_route = true;
         const response = await this.axios.get(
-        this.$root.store.server_domain + "/recipes/ExtendedRecipes/" + split_recipe_id)
+        this.$root.store.server_domain + "/recipes/ExtendedRecipes/" + split_recipe_id,
+        {
+          isMyRecipe: false,
+        }
+        );
         this.instructions = response.data.prepInstructions
         
         console.log(response.data.prepInstructions);
@@ -83,17 +87,17 @@ methods: {
         // }
       // console.log(response);
       this.recipe= response.data;
-      this.recipe_id= response.data.id;    
+      this.recipe_id= response.data.recipePreview.id;    
       //add to last watch table
-      if(this.$root.store.username){ //is user
-        const response = await this.axios.post( 
-        this.$root.store.server_domain + "/users/lastViewedRecipes/",
-        {
-          recipe_id: this.recipe_id,
-        }
-        );
-        // console.log(response)
-      }    
+      // if(this.$root.store.username){ //is user
+      //   const response = await this.axios.post( 
+      //   this.$root.store.server_domain + "/users/lastViewedRecipes/",
+      //   {
+      //     recipe_id: this.recipe_id,
+      //   }
+      //   );
+      //   // console.log(response)
+      // }    
       }
       // else{
       //   // console.log("else:")
@@ -119,7 +123,7 @@ methods: {
         // "https://test-for-3-2.herokuapp.com/user/Register",
         this.$root.store.server_domain + "/users/favorites",
         {
-          recipe_id: this.recipe_id
+          recipeId: this.recipe_id
         }
       );
       window.location.reload();
