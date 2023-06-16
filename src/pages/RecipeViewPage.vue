@@ -16,7 +16,7 @@
       <b-list-group >
         <dt>  {{ recipe.recipePreview.prepTime }} minutes to prepare</dt>
         <dt> {{ recipe.numberOfDishes }} servings</dt>
-        <dt>{{ recipe.recipePreview.popularity }} this recipe</dt>
+        <dt>{{ recipe.recipePreview.popularity }}  liked this recipe</dt>
         <dt v-if="recipe.recipePreview.vegan">  Vegan</dt>
         <dt v-if="recipe.recipePreview.vegetarian"> Vegeterian</dt>
         <dt v-if="recipe.recipePreview.glutenFree"> Gluten Free</dt>
@@ -78,8 +78,10 @@ methods: {
         }
         );
         this.instructions = response.data.prepInstructions
-        
-        console.log(response.data.prepInstructions);
+        // const lines = this.instructions.split("\n");
+        // this.instructions=lines;
+        // `<p>${index + 1}. ${line}</p>`;
+        // console.log(response.data.prepInstructions);
         // for (const analyze of array_steps){
         //   for(const ste of analyze.steps){
         //     this.instructions = this.instructions + ste.step
@@ -129,7 +131,15 @@ methods: {
       window.location.reload();
 
   }
-}
+},
+// computed: {
+//     formattedInstructions() {
+//       const lines = this.instructions.split("\n");
+//       return lines.map((line, index) => {
+//         return `<p>${index + 1}. ${line}</p>`;
+//       }).join("");
+//     },
+//   },
 };
 </script>
 
