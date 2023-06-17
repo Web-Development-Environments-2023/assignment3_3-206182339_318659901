@@ -67,39 +67,29 @@ methods: {
     try {
       let split_route = (((this.$route.path).split("/")[2]).split("%2F"))[2]
       let split_recipe_id = ((this.$route.path).split("/"))[4]
-              console.log(split_route)
+      console.log(split_route)
 
        if(split_route == "lastViewedRecipes" || split_route =="randomRecipes" || split_route =="favorites" || split_route =="search"){
         this.API_route = true;
         const response = await this.axios.get(
-        this.$root.store.server_domain + "/recipes/ExtendedRecipes/" + split_recipe_id,
-        {
-          isMyRecipe: false,
-        }
+        this.$root.store.server_domain + "/recipes/ExtendedRecipes/" + split_recipe_id  + "?isMyRecipe=false"
+      
         );
         this.instructions = response.data.prepInstructions
-        // const lines = this.instructions.split("\n");
-        // this.instructions=lines;
-        // `<p>${index + 1}. ${line}</p>`;
-        // console.log(response.data.prepInstructions);
-        // for (const analyze of array_steps){
-        //   for(const ste of analyze.steps){
-        //     this.instructions = this.instructions + ste.step
-        //   }
-        // }
-      // console.log(response);
+   
       this.recipe= response.data;
       this.recipe_id= response.data.recipePreview.id;    
-      //add to last watch table
-      // if(this.$root.store.username){ //is user
-      //   const response = await this.axios.post( 
-      //   this.$root.store.server_domain + "/users/lastViewedRecipes/",
-      //   {
-      //     recipe_id: this.recipe_id,
-      //   }
-      //   );
-      //   // console.log(response)
-      // }    
+     
+      }
+      if (split_route == "MyRecipes"){
+        const response = await this.axios.get(
+        this.$root.store.server_domain + "/recipes/ExtendedRecipes/" + split_recipe_id + "?isMyRecipe=true"
+        
+        );
+        this.instructions = response.data.prepInstructions
+   
+      this.recipe= response.data;
+      this.recipe_id= response.data.recipePreview.id; 
       }
       // else{
       //   // console.log("else:")
