@@ -285,16 +285,21 @@
             this.$root.store.server_domain + "/users/MyRecipes",
             {
               user_id: this.form.user_id,
-              image: this.form.image,
+              recipePreview: {
+                image: this.form.image,
               title: this.form.title,
               readyInMinutes: this.form.readyInMinutes,
               glutenFree: this.form.glutenFree,
               vegan: this.form.vegan,
               vegetarian: this.form.vegetarian,
+             
+            },
               ingredients: this.form.ingredients,
               prepInstructions: this.form.prepInstructions,
               numberOfDishes: this.form.numberOfDishes,
-            }
+              }
+            
+            
           );
           // move to My Recipe Page
           this.$router.push("/MyRecipes");
