@@ -9,26 +9,6 @@
     <br/>
     <br/>
     <b-form @submit.prevent="createRecipe" @reset.prevent="onReset">
-
-      <!-- UserId -->
-      <b-form-group 
-        id="input-group-user_id"
-        label-cols-sm="3"
-        label="User ID:"
-        label-for="user_id"
-        class="user_id-field"
-      >
-        <div v-if="!$v.form.image.required" class="invalid-feedback">
-          Image is required.
-        </div>
-        <b-form-input
-          id="user_id"
-          v-model="form.user_id"
-          type="text"
-          :state="validateState('user_id')"
-        ></b-form-input>
-      </b-form-group>
-
       <!-- Image -->
       <b-form-group 
         id="input-group-image"
@@ -206,7 +186,6 @@
     data(){
       return{
         form:{
-          user_id: "",
           image: "",
           title: "",
           readyInMinutes: "",
@@ -222,11 +201,6 @@
     },
     validations: {
       form: {
-        user_id:{
-          required,
-          alpha,
-          length: (u) => minLength(3)(u) && maxLength(8)(u),
-        },
         image: {
           required,
           alpha
@@ -237,7 +211,7 @@
         },
         readyInMinutes: {
           required,
-          alpha
+          digit: (p) => p && /\d/.test(p), 
         },
         glutenFree: {
           required,
@@ -281,17 +255,22 @@
           return;
         }
         try{
+          const user_id = await this.axios.get(
+          this.$root.store.server_domain + "/users/userid"
+        );
           const response = await this.axios.post(
             this.$root.store.server_domain + "/users/MyRecipes",
             {
-              user_id: this.form.user_id,
-              image: this.form.image,
-              title: this.form.title,
-              readyInMinutes: this.form.readyInMinutes,
-              glutenFree: this.form.glutenFree,
-              vegan: this.form.vegan,
-              vegetarian: this.form.vegetarian,
-              ingredients: this.form.ingredients,
+              user_id: user_id.data,
+              recipePreview:{
+                image: this.form.image,
+                title: this.form.title,
+                readyInMinutes: this.form.readyInMinutes,
+                glutenFree: this.form.glutenFree,
+                vegan: this.form.vegan,
+                vegetarian: this.form.vegetarian,
+              },
+              ingredient: this.form.ingredients,
               prepInstructions: this.form.prepInstructions,
               numberOfDishes: this.form.numberOfDishes,
             }
