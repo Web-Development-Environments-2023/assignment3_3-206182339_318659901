@@ -282,7 +282,7 @@
         }
         try{
           const response = await this.axios.post(
-            this.$root.store.server_domain + "/CreateRecipe",
+            this.$root.store.server_domain + "/users/MyRecipes",
             {
               user_id: this.form.user_id,
               image: this.form.image,
