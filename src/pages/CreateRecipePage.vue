@@ -62,21 +62,21 @@
         </b-form-input>
       </b-form-group>
 
-    <!-- Vegetarian -->
+      <!-- Gluten Free -->
       <b-form-group 
-        id="input-group-vegetarian"
+        id="input-group-glutenFree"
         label-cols-sm="3"
-        label="Vegetarian:"
-        label-for="vegetarian"
-        class="vegetarian-field"
+        label="Gluten Free:"
+        label-for="glutenFree"
+        class="glutenFree-field"
       >
-        <b-form-checkbox
-          id="vegetarian"
-          v-model="$v.form.vegetarian.$model"
-          :state="validateState('vegetarian')"
+        <b-form-input
+          id="glutenFree"
+          v-model = "$v.form.glutenFree.$model"
+          type="text"
+          :state="validateState('glutenFree')"
         >
-
-        </b-form-checkbox>
+        </b-form-input>
       </b-form-group>
 
       <!-- Vegan -->
@@ -87,28 +87,30 @@
         label-for="vegan"
         class="vegan-field"
       >
-        <b-form-checkbox
+        <b-form-input
           id="vegan"
-          v-model="$v.form.vegan.$model"
+          v-model = "$v.form.vegan.$model"
+          type="text"
           :state="validateState('vegan')"
         >
-        </b-form-checkbox>
+        </b-form-input>
       </b-form-group>
 
-      <!-- Gluten Free -->
+      <!-- Vegetarian -->
       <b-form-group 
-        id="input-group-glutenFree"
+        id="input-group-vegetarian"
         label-cols-sm="3"
-        label="Gluten Free:"
-        label-for="glutenFree"
-        class="glutenFree-field"
+        label="Vegetarian:"
+        label-for="vegetarian"
+        class="vegetarian-field"
       >
-        <b-form-checkbox
-          id="glutenFree"
-          v-model="$v.form.vegan.$model"
-          :state="validateState('glutenFree')"
+        <b-form-input
+          id="vegetarian"
+          v-model = "$v.form.vegetarian.$model"
+          type="text"
+          :state="validateState('vegetarian')"
         >
-        </b-form-checkbox>
+        </b-form-input>
       </b-form-group>
 
       <!-- Ingredients -->
@@ -177,8 +179,7 @@
   import { minLength } from 'vuelidate/lib/validators';
   import{
     required,
-    alpha,
-  url} from "vuelidate/lib/validators";
+    alpha} from "vuelidate/lib/validators";
   import RecipePreviewList from "../components/RecipePreviewList";
   export default {
     name : "Create Recipes",
@@ -188,9 +189,9 @@
           image: "",
           title: "",
           readyInMinutes: "",
-          glutenFree: "false",
-          vegan: "false",
-          vegetarian: "false",
+          glutenFree: "",
+          vegan: "",
+          vegetarian: "",
           ingredients: "",
           prepInstructions: "",
           numberOfDishes: "",
@@ -202,8 +203,7 @@
       form: {
         image: {
           required,
-          alpha,
-          url
+          alpha
         },
         title: {
           required,
@@ -215,13 +215,15 @@
         },
         glutenFree: {
           required,
-
+          alpha
         },
         vegan: {
           required,
+          alpha
         },
         vegetarian: {
           required,
+          alpha
         },
         image: {
           required,

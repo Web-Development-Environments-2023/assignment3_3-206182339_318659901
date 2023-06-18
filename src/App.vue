@@ -26,11 +26,11 @@
                   <button class="btn btn-link" @click="Logout">Logout</button>
                 </div>
               </li>
-              <!-- <li class="nav-item"> -->
-                <!-- <div v-if="$root.store.username" class="text-end me-3">
-                  <router-link class="nav-link" :to="{ name: 'create' }">Create Recipe</router-link> 
-                </div> -->
-              <!-- </li> -->
+              <li class="nav-item">
+                <div v-if="$root.store.username" class="text-end me-3">
+                  <router-link class="nav-link" :to="{ name: 'create' }">Create Recipe</router-link>
+                </div>
+              </li>
               <li class="nav-item">
                   <router-link class="nav-link" :to="{ name: 'about' }">About</router-link>
               </li>
@@ -45,14 +45,6 @@
                 </ul>
               </li>
             </ul>
-            <div v-if="$root.store.username">
-              <b-button id="show-btn" @click="openCreateRecipe">Create Recipe</b-button>
-              <b-modal ref="my-modal" hide-footer title="Using Component Methods">
-                <div class="d-block text-center">
-                  <!-- <h3>Hello From My Modal!</h3> -->
-                </div>
-              </b-modal>
-            </div>
 
             <div class="d-flex justify-content-end align-items-center">
               <div v-if="!$root.store.username" class="displayUser text-end me-3">Hello Guest</div>
@@ -71,9 +63,7 @@ export default {
   name: "App",
   data() {
     return {
-      modalVisible: true,
       isDropdownOpen: false,
-      create: this.$router.push({ name: 'create' }),
     };
   },
   mounted() {
@@ -101,41 +91,11 @@ export default {
       if (!dropdownElement.contains(event.target)) {
         this.isDropdownOpen = false;
       }
-    },
-    openCreateRecipe() {
-      const newWindow = window.open(this.$router.push({ name: 'create' }), "_blank", "width=800,height=600");
-      this.$router.push({ name: 'main'})
-      if (newWindow) {
-        newWindow.onload = () => {
-          newWindow.location.href = this.$router.resolve({ name: 'create' }).href;
-        };
-      } else {
-        console.error("Failed to open a new window.");
-      }
-    },
-    closeModal() {
-      this.modalVisible = false;
-    },
-    showModal() {
-        this.$refs['my-modal'].show()
-      },
-      hideModal() {
-        this.$refs['my-modal'].hide()
-      }
+    }
   }
 };
 </script>
-<!-- // this.$router.
-// if (newWindow) {
-//   newWindow.onload = () => {
-//     const newRouter = newWindow.VueRouterInstance; // Assuming you pass the Vue Router instance to the new window
-    
-//     // Use newRouter to navigate to a specific route in the new window
-//     // newRouter.push({ name: 'create' });
-//   };
-// } else {
-//   console.error("Failed to open a new window.");
-// } -->
+
 <style lang="scss">
 @import "@/scss/form-style.scss";
 
