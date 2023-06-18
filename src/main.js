@@ -10,7 +10,9 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
 });
+// import VueScrollFixedNavbar from "vue-scroll-fixed-navbar";
 
+// Vue.use(VueScrollFixedNavbar);
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -25,6 +27,11 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  FormRadioPlugin,
+  ModalPlugin,
+  FormCheckboxPlugin,
+  FormTextareaPlugin,
+  ListGroupPlugin,
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -37,6 +44,12 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  FormRadioPlugin,
+  FormCheckboxPlugin,
+  ModalPlugin,
+  FormTextareaPlugin,
+  ListGroupPlugin,
+
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 

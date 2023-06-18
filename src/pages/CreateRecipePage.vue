@@ -1,13 +1,9 @@
 <template>
   <div class="container">
     <br/>
-    <br/>
-    <br/>
-    <br/>
-    <!-- <h1 class="big-title text-center">Create Recipe</h1> -->
-    <RecipePreviewList route_name="/CreateRecipes" title="Create Recipes" class="CreateRecipes center" />
-    <br/>
-    <br/>
+
+    <div id="create-recipe-modal-content">
+        <b-modal id="modal-1"  ref="my-modal" title="Create New Recipe" hide-footer>
     <b-form @submit.prevent="createRecipe" @reset.prevent="onReset">
       <!-- Image -->
       <b-form-group 
@@ -16,6 +12,7 @@
         label="Image:"
         label-for="image"
         class="image-field"
+       
       >
         <div v-if="!$v.form.image.required" class="invalid-feedback">
           Image is required.
@@ -25,6 +22,7 @@
           v-model="form.image"
           type="text"
           :state="validateState('image')"
+          placeholder = "image url"
         ></b-form-input>
       </b-form-group>
 
@@ -32,7 +30,7 @@
       <b-form-group 
         id="input-group-title"
         label-cols-sm="3"
-        label="Title:"
+        label="Recipe name:"
         label-for="title"
         class="title-field"
       >
@@ -41,6 +39,7 @@
           v-model = "$v.form.title.$model"
           type="text"
           :state="validateState('title')"
+          placeholder = "Enter recipe name"
         >
         </b-form-input>
       </b-form-group>
@@ -58,60 +57,20 @@
           v-model = "$v.form.readyInMinutes.$model"
           type="text"
           :state="validateState('readyInMinutes')"
+          placeholder = "Enter prepration time in minutes.."
         >
         </b-form-input>
       </b-form-group>
 
-      <!-- Gluten Free -->
-      <b-form-group 
-        id="input-group-glutenFree"
-        label-cols-sm="3"
-        label="Gluten Free:"
-        label-for="glutenFree"
-        class="glutenFree-field"
-      >
-        <b-form-input
-          id="glutenFree"
-          v-model = "$v.form.glutenFree.$model"
-          type="text"
-          :state="validateState('glutenFree')"
-        >
-        </b-form-input>
-      </b-form-group>
-
-      <!-- Vegan -->
-      <b-form-group 
-        id="input-group-vegan"
-        label-cols-sm="3"
-        label="Vegan:"
-        label-for="vegan"
-        class="vegan-field"
-      >
-        <b-form-input
-          id="vegan"
-          v-model = "$v.form.vegan.$model"
-          type="text"
-          :state="validateState('vegan')"
-        >
-        </b-form-input>
-      </b-form-group>
-
-      <!-- Vegetarian -->
-      <b-form-group 
-        id="input-group-vegetarian"
-        label-cols-sm="3"
-        label="Vegetarian:"
-        label-for="vegetarian"
-        class="vegetarian-field"
-      >
-        <b-form-input
-          id="vegetarian"
-          v-model = "$v.form.vegetarian.$model"
-          type="text"
-          :state="validateState('vegetarian')"
-        >
-        </b-form-input>
-      </b-form-group>
+      <b-form-checkbox v-model="$v.form.glutenFree.$model" name="check-button1" switch>
+        Gluten free?
+    </b-form-checkbox>       
+    <b-form-checkbox v-model="$v.form.vegan.$model" name="check-button2" switch>
+        Vegan? 
+    </b-form-checkbox>
+    <b-form-checkbox v-model="$v.form.vegetarian.$model" name="check-button3" switch>
+        Vegetarian? 
+    </b-form-checkbox>  
 
       <!-- Ingredients -->
       <b-form-group 
@@ -121,13 +80,15 @@
         label-for="ingredients"
         class="ingredients-field"
       >
-        <b-form-input
+        <b-form-textarea
           id="ingredients"
           v-model = "$v.form.ingredients.$model"
           type="text"
           :state="validateState('ingredients')"
+          placeholder = "Enter recipe ingredients. for example: oil- 2 cups | sugar- 1 cup |..."
+          rows="4"
         >
-        </b-form-input>
+        </b-form-textarea>
       </b-form-group>
 
       <!-- prepInstructions -->
@@ -138,13 +99,15 @@
         label-for="prepInstructions"
         class="prepInstructions-field"
       >
-        <b-form-input
+        <b-form-textarea
           id="prepInstructions"
           v-model = "$v.form.prepInstructions.$model"
           type="text"
           :state="validateState('prepInstructions')"
+          placeholder = "Enter recipe Instructions.."
+          rows="4"
         >
-        </b-form-input>
+        </b-form-textarea>
       </b-form-group>
 
       <!-- numberOfDishes -->
@@ -160,6 +123,7 @@
           v-model = "$v.form.numberOfDishes.$model"
           type="text"
           :state="validateState('numberOfDishes')"
+          placeholder = "Enter number of servings.."
         >
         </b-form-input>
       </b-form-group>
@@ -171,27 +135,33 @@
         >Create Recipe
       </b-button>
     </b-form>
+</b-modal>
+</div>
   </div>
 </template>
 
 
 <script>
+  import { BModal } from 'bootstrap-vue';
   import { minLength } from 'vuelidate/lib/validators';
   import{
     required,
     alpha} from "vuelidate/lib/validators";
   import RecipePreviewList from "../components/RecipePreviewList";
   export default {
-    name : "Create Recipes",
+    // name : "Create Recipes",
+//     components: {
+//     BModal
+//   },
     data(){
       return{
         form:{
           image: "",
           title: "",
           readyInMinutes: "",
-          glutenFree: "",
-          vegan: "",
-          vegetarian: "",
+          glutenFree: false,
+          vegan: false,
+          vegetarian: false,
           ingredients: "",
           prepInstructions: "",
           numberOfDishes: "",
@@ -203,11 +173,11 @@
       form: {
         image: {
           required,
-          alpha
+        
         },
         title: {
           required,
-          alpha
+         
         },
         readyInMinutes: {
           required,
@@ -215,27 +185,24 @@
         },
         glutenFree: {
           required,
-          alpha
+         
         },
         vegan: {
           required,
-          alpha
+        
         },
         vegetarian: {
           required,
-          alpha
+         
         },
-        image: {
-          required,
-          alpha
-        },
+       
         ingredients: {
           required,
-          alpha
+          
         },
         prepInstructions: {
           required,
-          alpha
+         
 
         },
         numberOfDishes: {
@@ -245,9 +212,10 @@
         },
       }
     },
-    components:{
-      RecipePreviewList
-    },
+    // components:{
+    //   RecipePreviewList
+    // },
+  
     methods: {
       async createRecipe(){
         this.$v.form.$touch();
@@ -266,9 +234,9 @@
                 image: this.form.image,
                 title: this.form.title,
                 readyInMinutes: this.form.readyInMinutes,
-                glutenFree: this.form.glutenFree,
-                vegan: this.form.vegan,
-                vegetarian: this.form.vegetarian,
+                glutenFree: this.form.glutenFree & 1,
+                vegan: this.form.vegan & 1,
+                vegetarian: this.form.vegetarian & 1,
               },
               ingredient: this.form.ingredients,
               prepInstructions: this.form.prepInstructions,
@@ -277,8 +245,10 @@
             
             
           );
-          // move to My Recipe Page
-          this.$router.push("/MyRecipes");
+        //   // move to My Recipe Page
+        //   this.$router.push("/MyRecipes");
+        await this.onReset();
+        this.$refs['my-modal'].hide()
         } catch (err) {
           console.log(err.response);
           this.form.submitError = err.response.data.message;
@@ -290,9 +260,9 @@
           image: "",
           title: "",
           readyInMinutes: "",
-          glutenFree: "",
-          vegan: "",
-          vegetarian: "",
+          glutenFree: false,
+          vegan: false,
+          vegetarian: false,
           ingredients: "",
           prepInstructions: "",
           numberOfDishes: "",
@@ -307,6 +277,7 @@
     }
     }
   }
+
 </script>
 
 <style>

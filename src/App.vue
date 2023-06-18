@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
           <div class="navbar-collapse">
@@ -23,14 +23,16 @@
               </li>
               <li class="nav-item">
                 <div v-if="$root.store.username" class="text-end me-3">
-                  <button class="btn btn-link" @click="Logout">Logout</button>
+                  <router-link v-b-modal.modal-1 id="modal-1" tag="b-nav-item" to="/" @click.native="Logout()" ><b style="color:black ;">Logout</b></router-link>
                 </div>
-              </li>
-              <li class="nav-item">
-                <div v-if="$root.store.username" class="text-end me-3">
-                  <router-link class="nav-link" :to="{ name: 'create' }">Create Recipe</router-link>
-                </div>
-              </li>
+              </li> -->
+             <!-- <CreateRecipePage/> -->
+             <!-- <b-navbar-nav v-if="$root.store.username">  
+              
+                  <b-nav-item v-b-modal.modal-1 id="modal-1" tag="b-nav-item" @click="showModal"
+                    ><b style="color: black">Create Recipe</b></b-nav-item>
+                    <CreateRecipePage v-if="createRecipeClicked"></CreateRecipePage>
+                </b-navbar-nav>
               <li class="nav-item">
                   <router-link class="nav-link" :to="{ name: 'about' }">About</router-link>
               </li>
@@ -54,24 +56,34 @@
         </div>
       </nav>
     </div>
+    <router-view /> -->
+    <NavBar/>
+    
     <router-view />
   </div>
 </template>
 
 <script>
+import CreateRecipePage from './pages/CreateRecipePage.vue';
+import NavBar from "./components/NavBar.vue";
 export default {   
   name: "App",
-  data() {
-    return {
-      isDropdownOpen: false,
-    };
+  components: {
+    NavBar
   },
-  mounted() {
-    document.addEventListener("click", this.handleOutsideClick);
-  },
-  beforeUnmount() {
-    document.removeEventListener("click", this.handleOutsideClick);
-  },
+  // data() {
+  //   return {
+  //     isDropdownOpen: false,
+  //     createRecipeClicked: false,
+  //   };
+  // },
+  // mounted() {
+  //   this.createRecipeClicked = false;
+  //   document.addEventListener("click", this.handleOutsideClick);
+  // },
+  // beforeUnmount() {
+  //   document.removeEventListener("click", this.handleOutsideClick);
+  // },
   methods: {
     Logout() {
       this.$root.store.logout();
@@ -83,15 +95,20 @@ export default {
     },
     isLoggedIn(){return $root.store.username;},
 
-    toggleDropdown() {
-      this.isDropdownOpen = !this.isDropdownOpen;
-    },
-    handleOutsideClick(event) {
-      const dropdownElement = this.$refs.dropdown;
-      if (!dropdownElement.contains(event.target)) {
-        this.isDropdownOpen = false;
-      }
-    }
+  //   toggleDropdown() {
+  //     this.isDropdownOpen = !this.isDropdownOpen;
+  //   },
+  //   handleOutsideClick(event) {
+  //     const dropdownElement = this.$refs.dropdown;
+  //     if (!dropdownElement.contains(event.target)) {
+  //       this.isDropdownOpen = false;
+  //     }
+  //   },
+  //   showModal(){
+  //     this.createRecipeClicked = true
+  //   }
+  
+  // }
   }
 };
 </script>
@@ -108,36 +125,36 @@ export default {
 }
 
 
-#nav {
-  padding: 30px;
-    letter-spacing: 2px;
-    color: white;
-    font-size: 30px;
-    font-weight: 50;
-    border: 2px solid #ccd5d9;
-    background-color:rgb(112, 147, 216);
-    padding: 10px 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    animation: fadeIn 1s ease-in forwards;
-}
+// #nav {
+//   padding: 30px;
+//     letter-spacing: 2px;
+//     color: white;
+//     font-size: 30px;
+//     font-weight: 50;
+//     border: 2px solid #ccd5d9;
+//     background-color:rgb(112, 147, 216);
+//     padding: 10px 10px;
+//     cursor: pointer;
+//     border-radius: 10px;
+//     animation: fadeIn 1s ease-in forwards;
+// }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+// #nav a {
+//   font-weight: bold;
+//   color: #2c3e50;
+// }
 
-#nav a.router-link-exact-active {
-  color:rgb(112, 185, 216);
-}
+// #nav a.router-link-exact-active {
+//   color:rgb(112, 185, 216);
+// }
 
 
-.displayUser {
-    color: rgb(112, 143, 216);
-    margin-left: auto;
-    width: 10%;
-    padding: 10px;
-    background-color: #f8f9fa;
-    text-align: right;
-  }
+// .displayUser {
+//     color: rgb(112, 143, 216);
+//     margin-left: auto;
+//     width: 10%;
+//     padding: 10px;
+//     background-color: #f8f9fa;
+//     text-align: right;
+//   }
 </style>
