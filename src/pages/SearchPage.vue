@@ -63,7 +63,7 @@
       </b-col>
     </b-row> 
 
-    <div class="sort-num">
+    <!-- <div class="sort-num">
     <div class="col">
       <div class="form-group search-field">
         <label for="num-results">Number of Results:</label>
@@ -93,7 +93,22 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+  <b-row class="sort-num">
+      <b-col >
+      <b-form-group label="number of results:" class="search-field" v-slot="{ ariaDescribedby }">
+        <b-form-radio v-model="form.selected_num" :aria-describedby="ariaDescribedby" name="some-radios" value="5">5</b-form-radio>
+        <b-form-radio v-model="form.selected_num" :aria-describedby="ariaDescribedby" name="some-radios" value="10">10</b-form-radio>
+        <b-form-radio v-model="form.selected_num" :aria-describedby="ariaDescribedby" name="some-radios" value="15">15</b-form-radio>
+      </b-form-group>
+      </b-col>
+      <b-col>
+        <b-form-group label="sort results by:" class="search-field" v-slot="{ ariaDescribedby }">
+          <b-form-radio v-model="form.selected_sort" :aria-describedby="ariaDescribedby" name="some-radios2" value="popularity">popularity</b-form-radio>
+          <b-form-radio v-model="form.selected_sort" :aria-describedby="ariaDescribedby" name="some-radios2" value="time">time</b-form-radio>
+        </b-form-group>
+     </b-col>  
+  </b-row>
     <b-row>
       <!-- <b-button @click="Register" -->
       <b-col cols="2" md="5">
@@ -279,6 +294,7 @@ export default {
 
 
 .btn-warning{
+  font-family:  "Papyrus";
   width:65%;
   padding: 15px 15px;
   background-color: #9cdcf1;
@@ -288,6 +304,7 @@ export default {
   margin: 15px 15px 20px 90px;
 }
 .btn-primary{
+  font-family:  "Papyrus";
   width:95%;
   padding: 15px 15px;
   font-weight: bold;
@@ -297,7 +314,7 @@ export default {
 .search-field {
   color: black;
   // font-weight: bolder;
-    font-family:  Georgia, 'Times New Roman', Times, serif;
+    font-family:  "Papyrus";
     font-size: 15px;
     letter-spacing: 0.4px;
     word-spacing: -0.4px;

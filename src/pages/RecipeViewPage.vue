@@ -67,7 +67,7 @@ methods: {
     try {
       let split_route = (((this.$route.path).split("/")[2]).split("%2F"))[2]
       let split_recipe_id = ((this.$route.path).split("/"))[4]
-      console.log(split_route)
+      console.log(this.$route.path)
 
        if(split_route == "lastViewedRecipes" || split_route =="randomRecipes" || split_route =="favorites" || split_route =="search"){
         this.API_route = true;
@@ -82,6 +82,16 @@ methods: {
      
       }
       if (split_route == "MyRecipes"){
+        const response = await this.axios.get(
+        this.$root.store.server_domain + "/recipes/ExtendedRecipes/" + split_recipe_id + "?isMyRecipe=true"
+        
+        );
+        this.instructions = response.data.prepInstructions
+   
+      this.recipe= response.data;
+      this.recipe_id= response.data.recipePreview.id; 
+      }
+      if (split_route == "familyRecipes"){
         const response = await this.axios.get(
         this.$root.store.server_domain + "/recipes/ExtendedRecipes/" + split_recipe_id + "?isMyRecipe=true"
         

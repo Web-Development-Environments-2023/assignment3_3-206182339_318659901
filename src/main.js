@@ -10,9 +10,12 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
 });
-// import VueScrollFixedNavbar from "vue-scroll-fixed-navbar";
 
-// Vue.use(VueScrollFixedNavbar);
+;import VueCookies from "vue-cookies"
+;Vue.use(VueCookies)
+import VueScrollFixedNavbar from "vue-scroll-fixed-navbar";
+
+Vue.use(VueScrollFixedNavbar);
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";

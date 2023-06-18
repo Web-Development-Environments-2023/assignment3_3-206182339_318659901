@@ -4,7 +4,7 @@
       <br/>
       <br/>
       <br/>
-      <RecipePreviewList route_name="/users/familyRecipes" title="Family Recipes" class="FamilyRecipes center" />
+      <RecipePreviewList route_name="/recipes/familyRecipes" title="Family Recipes" class="FamilyRecipes center" />
       <br/>
       <br/>
   </div>

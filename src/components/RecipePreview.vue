@@ -69,12 +69,12 @@
   methods: {
      async updateRecipes() {
        try {
-           // console.log("rout.path:  " + this.$route.path)
+           console.log("rout.path:  " + this.$route.path)
            // if(this.split_route=="" ||split_route == "lastWatched" || split_route =="random" || split_route =="favorites" || split_route =="search"){
            if(this.$route.path=="/" ||this.$route.path == "/lastViewedRecipes" || this.$route.path =="/randomrecipes" || this.$route.path =="/users/favorites" || this.$route.path =="/search"){
              this.API_route = true;
            }
-           else if(this.$route.path=="/users/familyRecipes"){
+           else if(this.$route.path=="/familyRecipes"){
                this.is_family = true;
  
            }
