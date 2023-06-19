@@ -24,13 +24,13 @@
     <b-list-group>
          <!-- <dt style="color: #14b8a6" v-if="is_family">This dish usually prepared by {{ recipe.family_member }} </dt>
          <dt style="color: #14b8a6" v-if="is_family">Traditionally, the dish is prepared {{ recipe.when_prepering }}  </dt> -->
-         <dt>    {{ recipe.readyInMinutes }} minutes to prepare</dt>
-         <dt>{{ recipe.popularity }}  liked this recipe</dt>
-         <dt v-if="recipe.vegan">  Vegan</dt>
-         <dt v-if="recipe.vegetarian">Vegeterian</dt>
-         <dt v-if="recipe.glutenFree"> Gluten Free</dt>
-         <dt v-if="API_route && recipe.Favorite">  Favorite Recipe</dt>
-         <dt v-if="API_route && recipe.Seen">  Viewed Recipe</dt>
+         <dt>   ⏰ {{ recipe.readyInMinutes }} minutes to prepare</dt>
+         <dt> ❤️{{ recipe.popularity }}  liked this recipe</dt>
+         <dt  v-if="recipe.vegan"> 🌿🌿  Vegan</dt>
+         <dt v-if="recipe.vegetarian"> 🌿Vegeterian</dt>
+         <dt v-if="recipe.glutenFree">🌾🚫 Gluten Free</dt>
+         <dt v-if="API_route && recipe.Favorite"> 💗 Favorite Recipe</dt>
+         <dt v-if="API_route && recipe.Seen">👁️  Viewed Recipe</dt>
        </b-list-group>
      </b-card-text>
    </b-card>

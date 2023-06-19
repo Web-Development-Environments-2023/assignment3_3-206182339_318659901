@@ -122,8 +122,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   min-height: 100vh;
+  background: url("./assets/tomatoes-tomatoes-lemon-leaves-garlic-bottle-oil-tree-branches.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
-
+#app::after{
+  background-image: url("./assets/tomatoes-tomatoes-lemon-leaves-garlic-bottle-oil-tree-branches.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 // #nav {
 //   padding: 30px;

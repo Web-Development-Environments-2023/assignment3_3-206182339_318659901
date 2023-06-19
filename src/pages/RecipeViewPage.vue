@@ -14,14 +14,14 @@
     <br/>
     <ul class="recipe-overview">
       <b-list-group >
-        <dt>  {{ recipe.recipePreview.prepTime }} minutes to prepare</dt>
-        <dt> {{ recipe.numberOfDishes }} servings</dt>
-        <dt>{{ recipe.recipePreview.popularity }}  liked this recipe</dt>
-        <dt v-if="recipe.recipePreview.vegan">  Vegan</dt>
-        <dt v-if="recipe.recipePreview.vegetarian"> Vegeterian</dt>
-        <dt v-if="recipe.recipePreview.glutenFree"> Gluten Free</dt>
-        <dt v-if="recipe.recipePreview.Favorite"> Favorite Recipe</dt>
-        <dt v-if="recipe.recipePreview.Seen"> Viewed Recipe</dt>
+        <dt>  ⏰ {{ recipe.recipePreview.prepTime }} minutes to prepare</dt>
+        <dt> 🍲 {{ recipe.numberOfDishes }} servings</dt>
+        <dt> ❤️ {{ recipe.recipePreview.popularity }}  liked this recipe</dt>
+        <dt v-if="recipe.recipePreview.vegan"> 🌿🌿 Vegan</dt>
+        <dt v-if="recipe.recipePreview.vegetarian">🌿 Vegeterian</dt>
+        <dt v-if="recipe.recipePreview.glutenFree">🌾🚫  Gluten Free</dt>
+        <dt v-if="recipe.recipePreview.Favorite">💗 Favorite Recipe</dt>
+        <dt v-if="recipe.recipePreview.Seen"> 👁️ Viewed Recipe</dt>
         <br/>
        <center>
            <b-button pill v-if="API_route" id="favoritesButton" size="sm" @click="AddToFavorites" class="btn-warning w-15 h-20"> add to favorites</b-button>

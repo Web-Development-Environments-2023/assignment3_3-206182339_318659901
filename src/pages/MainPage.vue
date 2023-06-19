@@ -3,7 +3,7 @@
     <div id="welcome" align="center" justify="center"><img src="../assets/logowelcome.png" width = "400" height = "300" /></div> 
       <b-row> 
       <b-col  class="RandomRecipesCol">
-        <RecipePreviewList route_name="/recipes/randomRecipes" title="Random Recipes" class="RandomRecipes center" />
+        <RecipePreviewList route_name="/recipes/randomRecipes" title="Explore this recipes" class="RandomRecipes center" />
         <b-button tag="button" pill @click="new_random_recipes"
           style="
           width:65%;
@@ -12,7 +12,7 @@
           border-color: #F19CBB;
           font-weight: bold;
           color: #080807;
-          margin: 15px 50px 50px 100px;"> New Random Recipes 
+          margin: 15px 50px 50px 100px;"> Explore more recipes 
         </b-button>
       </b-col>
       <b-col  >

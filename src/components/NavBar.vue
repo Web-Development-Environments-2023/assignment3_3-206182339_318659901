@@ -30,8 +30,9 @@
       <b-navbar-nav v-if="$root.store.username">  
         <b-navbar-nav>
           <!-- <CreateRecipePage/> -->
-          <b-nav-item v-b-modal.modal-1 id="modal-1" tag="b-nav-item" @click="showModal"
-            ><b style="color: black">Create Recipe</b></b-nav-item>
+                <b-nav-item v-b-modal.modal-1 id="modal-1" tag="b-nav-item" @click="showModal">
+        <b style="color: black" class="create-recipe-tab">Create Recipe</b>
+        </b-nav-item>
             <CreateRecipePage v-if="createRecipeClicked"></CreateRecipePage>
         </b-navbar-nav>
         
@@ -63,7 +64,7 @@
            <b-nav-item>
            <b-row> 
             <b-col>
-              <b-navbar-item><h3 style="color:black ;">Hello {{ $root.store.username }}   </h3></b-navbar-item>  
+              <b-navbar-item><h2 style="color:black ;">Hello {{ $root.store.username }}   </h2></b-navbar-item>  
            </b-col> 
            <router-link v-b-modal.modal-1 id="modal-1" tag="b-nav-item" to="/" @click.native="Logout()" ><b style="color:black ;">Logout</b></router-link></b-row>
             <!-- <button @click="Logout" id="button"><b>Logout</b></button> -->
@@ -110,22 +111,27 @@
   <style>
   .nav-bar{
     padding: 30px;
+    font-family: "Papyrus";
     letter-spacing: 2px;
-     color: white;
+     /* color: white;
      font-size: 30px;
      font-weight: 50;
-     border: 2px solid #ccd5d9;
+     border: 2px solid #ccd5d9; */
      background-color:rgb(112, 147, 216);
-     padding: 10px 10px;
-     cursor: pointer;
-     border-radius: 10px;
-     animation: fadeIn 1s ease-in forwards;
+     height:50px ;
   
   
   }
+    .b-navbar-nav > .b-nav-item > .nav-link {
+    white-space: nowrap;
+    }
   .nav-bar.navbar-dark.bg-dark{
       background-color: #AABB55!important;
    }
+   .create-recipe-tab {
+  display: inline-block;
+  white-space: nowrap;
+}
   
   .bold-option{
     font-weight: bolder;

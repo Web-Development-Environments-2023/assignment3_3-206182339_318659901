@@ -26,6 +26,7 @@
                 <!-- <div class="links-container">
                 </div> -->
                 <div class="text-content">
+                    <h1>Authors: Michal Alhindi & Sean Hacmon</h1>
 
                     <p>
                         <b-list-group-item><a class="links" href="https://github.com/MichalAlhindi" target=”_blank”>Michal's git</a></b-list-group-item>
@@ -48,7 +49,7 @@
                     <br>
                     <br>
                     <p>
-                        Our Team : 2 Software & Information System Engineers 3rd year students.
+                         2 Software & Information System Engineers 3rd year students.
                     </p>
                     <p class="michal">
                         &nbsp; &nbsp; &nbsp; &nbsp; Michal Responsibilty :
