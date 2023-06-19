@@ -159,6 +159,7 @@ export default {
   },
   data() {
     return {
+      showAutocomplete: true,
       form: {
         query: "",
         cuisine: "",
@@ -190,6 +191,16 @@ export default {
     //   const { $dirty, $error } = this.$v.form[param];
     //   return $dirty ? !$error : null;
     // },    
+    clearInput() {
+      var input = document.getElementById("query");
+      input.value = ""; // Clear the input field
+
+      // Remove any suggestions or previous inputs
+      if (input.autocomplete) {
+        input.autocomplete = "off";
+        this.showAutocomplete = false; // Disable autocomplete suggestions
+      }
+    },
     async url_Search(){
       let search_url="";
       
@@ -332,3 +343,5 @@ export default {
   font-size: 48px;
 }
 </style>
+
+export default SearchPage
