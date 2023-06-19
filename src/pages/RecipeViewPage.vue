@@ -6,6 +6,7 @@
     <h4 id="big-title" :title="recipe.recipePreview.title" class="recipe-title">
       {{ recipe.recipePreview.title }}
     </h4>
+    <h4 id= "family-title" v-if="is_family"> This recipe was made with love by {{ recipe.familyMember }} and we used to make it on {{recipe.familyTime}} .</h4>
     <br/>
     <div pill class="recipe-body">
         <!-- <img v-if="image_load" :src="recipe.image" class="recipe-image" /> -->
@@ -56,6 +57,7 @@ data() {
     instructions:"",
     recipe_id:"",
     API_route: false,
+    is_family : false,
   };
 },
 mounted() {
@@ -96,10 +98,12 @@ methods: {
         this.$root.store.server_domain + "/recipes/ExtendedRecipes/" + split_recipe_id + "?isMyRecipe=true"
         
         );
+        
         this.instructions = response.data.prepInstructions
    
       this.recipe= response.data;
       this.recipe_id= response.data.recipePreview.id; 
+      this.is_family=true;
       }
       // else{
       //   // console.log("else:")
@@ -120,6 +124,7 @@ methods: {
       console.log(error);
     }
   },
+ 
   async AddToFavorites(){
      const response = await this.axios.post(
         // "https://test-for-3-2.herokuapp.com/user/Register",
@@ -200,6 +205,11 @@ width:800px;
   font-size: 48px;
   font-weight: bolder;
 }
-
+#family-title{
+  font-family:"Papyrus";
+  color:#e38cb3; 
+ 
+  font-weight: bolder;
+}
 
 </style>

@@ -15,15 +15,15 @@
   style="max-width: 33rem;"
 >
   <b-card-title 
-    style="font-size: 28px; color: #333; font-weight: bold; font-family: 'Arial', sans-serif;" 
+    style="font-size: 28px; color: #333; font-weight: bold; font-family: Arial, Helvetica, sans-serif ;"
     class="text-center"
   >
     {{ recipe_title }}
   </b-card-title>
   <b-card-text class="recipePreviewDetailsText">
     <b-list-group>
-         <!-- <dt style="color: #14b8a6" v-if="is_family">This dish usually prepared by {{ recipe.family_member }} </dt>
-         <dt style="color: #14b8a6" v-if="is_family">Traditionally, the dish is prepared {{ recipe.when_prepering }}  </dt> -->
+         <dt style="color: #14b8a6" v-if="is_family">This recipe usually prepared by {{ recipe.familyMember }} </dt>
+         <dt style="color: #14b8a6" v-if="is_family">Traditionally, we use to make it on {{ recipe.familyTime }}  </dt>
          <dt>   ⏰ {{ recipe.readyInMinutes }} minutes to prepare</dt>
          <dt> ❤️{{ recipe.popularity }}  liked this recipe</dt>
          <dt  v-if="recipe.vegan"> 🌿🌿  Vegan</dt>

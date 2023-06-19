@@ -340,15 +340,16 @@ export default {
 }
 
 .big-title{
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-family:"Papyrus";
   font-size: 48px;
   color:#0f4e9f;
   font-weight: bolder;
 }
 .btn-warning{
   width:55%;
+  font-family:"Papyrus";
   padding: 15px 20px;
-  background-color: #082175;
+  background-color: #587aea;
   border-color: #9cc1f1;
   font-weight: bold;
   color: #080807;
@@ -356,6 +357,7 @@ export default {
 }
 .btn-primary{
   width:20%;
+  font-family:"Papyrus";
   padding: 15px 20px;
   font-weight: bold;
   color: #080807;
@@ -363,7 +365,7 @@ export default {
 .register-field {
   color: black;
   // font-weight: bolder;
-    font-family: Georgia, cursive, sans-serif;
+    font-family:"Papyrus";
     font-size: 15px;
     letter-spacing: 0.4px;
     word-spacing: -0.4px;

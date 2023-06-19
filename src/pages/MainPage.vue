@@ -17,7 +17,7 @@
       </b-col>
       <b-col  >
         <!-- this is the false above ths title of last viewed -->
-        <RecipePreviewList route_name="/users/lastViewedRecipes" title="Last Viewed Recipes" class="LastViewedRecipes center"
+        <RecipePreviewList v-if="$root.store.username" route_name="/users/lastViewedRecipes" title="Last Viewed Recipes" class="LastViewedRecipes center"
           :class="{
             // RandomRecipes: true,
             blur: !$root.store.username,
