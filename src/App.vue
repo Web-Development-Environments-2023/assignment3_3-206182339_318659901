@@ -1,62 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-          <div class="navbar-collapse">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'main' }">Home</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'search' }">Search</router-link>
-              </li>
-              <li class="nav-item">
-                <div v-if="!$root.store.username" class="text-end me-3">
-                  <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link>
-                </div>
-              </li>
-              <li class="nav-item">
-                <div v-if="!$root.store.username" class="text-end me-3">
-                  <router-link class="nav-link" :to="{ name: 'login' }">Login</router-link>
-                </div>
-              </li>
-              <li class="nav-item">
-                <div v-if="$root.store.username" class="text-end me-3">
-                  <router-link v-b-modal.modal-1 id="modal-1" tag="b-nav-item" to="/" @click.native="Logout()" ><b style="color:black ;">Logout</b></router-link>
-                </div>
-              </li> -->
-             <!-- <CreateRecipePage/> -->
-             <!-- <b-navbar-nav v-if="$root.store.username">  
-              
-                  <b-nav-item v-b-modal.modal-1 id="modal-1" tag="b-nav-item" @click="showModal"
-                    ><b style="color: black">Create Recipe</b></b-nav-item>
-                    <CreateRecipePage v-if="createRecipeClicked"></CreateRecipePage>
-                </b-navbar-nav>
-              <li class="nav-item">
-                  <router-link class="nav-link" :to="{ name: 'about' }">About</router-link>
-              </li>
-              <li v-if="$root.store.username" class="nav-item dropdown" ref="dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="privateAreaDropdown" role="button" :aria-expanded="isDropdownOpen.toString()" @click="toggleDropdown">
-                  Private Area
-                </a>
-                <ul class="nav-link dropdown-menu" aria-labelledby="privateAreaDropdown" v-if="isDropdownOpen">
-                  <li><router-link class="nav-link dropdown-item" :to="{ name: 'favorites' }">My Favorites</router-link></li>
-                  <li><router-link class="nav-link dropdown-item" :to="{ name: 'MyRecipesPage' }">My Recipes</router-link></li>
-                  <li><router-link class="nav-link dropdown-item" :to="{ name: 'familyRecipes' }">My Family Recipes</router-link></li>
-                </ul>
-              </li>
-            </ul>
-
-            <div class="d-flex justify-content-end align-items-center">
-              <div v-if="!$root.store.username" class="displayUser text-end me-3">Hello Guest</div>
-              <div v-else class="displayUser text-end me-3">{{ $root.store.username }}</div>
-            </div> 
-          </div>
-        </div>
-      </nav>
-    </div>
-    <router-view /> -->
     <NavBar/>
     
     <router-view />
@@ -64,12 +7,13 @@
 </template>
 
 <script>
+import Search from "../src/pages/SearchPage.vue"
 import CreateRecipePage from './pages/CreateRecipePage.vue';
 import NavBar from "./components/NavBar.vue";
 export default {   
   name: "App",
   components: {
-    NavBar
+    NavBar,
   },
   // data() {
   //   return {
@@ -86,6 +30,7 @@ export default {
   // },
   methods: {
     Logout() {
+      this.$emit('clearInput');
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
 

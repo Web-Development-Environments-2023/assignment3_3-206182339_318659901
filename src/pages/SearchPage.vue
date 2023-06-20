@@ -159,6 +159,7 @@ export default {
   },
   data() {
     return {
+     
       form: {
         query: "",
         cuisine: "",
@@ -337,3 +338,5 @@ export default {
   font-size: 48px;
 }
 </style>
+
+export default SearchPage
