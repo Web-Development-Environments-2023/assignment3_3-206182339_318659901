@@ -15,22 +15,9 @@ export default {
   components: {
     NavBar,
   },
-  // data() {
-  //   return {
-  //     isDropdownOpen: false,
-  //     createRecipeClicked: false,
-  //   };
-  // },
-  // mounted() {
-  //   this.createRecipeClicked = false;
-  //   document.addEventListener("click", this.handleOutsideClick);
-  // },
-  // beforeUnmount() {
-  //   document.removeEventListener("click", this.handleOutsideClick);
-  // },
+
   methods: {
     Logout() {
-      this.$emit('clearInput');
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
 
@@ -40,20 +27,6 @@ export default {
     },
     isLoggedIn(){return $root.store.username;},
 
-  //   toggleDropdown() {
-  //     this.isDropdownOpen = !this.isDropdownOpen;
-  //   },
-  //   handleOutsideClick(event) {
-  //     const dropdownElement = this.$refs.dropdown;
-  //     if (!dropdownElement.contains(event.target)) {
-  //       this.isDropdownOpen = false;
-  //     }
-  //   },
-  //   showModal(){
-  //     this.createRecipeClicked = true
-  //   }
-  
-  // }
   }
 };
 </script>
