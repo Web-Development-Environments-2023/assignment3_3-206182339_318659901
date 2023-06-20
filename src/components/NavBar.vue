@@ -96,6 +96,8 @@
       Logout() {
         this.$root.store.logout();
         this.$root.toast("Logout", "User logged out successfully", "success");
+        this.$cookies.remove("session");
+        localStorage.clear();
         this.$router.push("/").catch(() => {
           this.$forceUpdate();
         });

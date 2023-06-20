@@ -88,6 +88,7 @@ Vue.config.productionTip = false;
 const shared_data = {
   username: localStorage.username,
   server_domain: "http://localhost:3000",
+  search_url_: localStorage.search_url_,
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -97,6 +98,11 @@ const shared_data = {
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
+  },
+  last_search(search_url){
+    localStorage.setItem("search_url_", search_url);
+    this.search_url_ = search_url;
+    console.log("last search");
   },
 };
 console.log(shared_data);

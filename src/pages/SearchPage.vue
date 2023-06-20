@@ -178,18 +178,20 @@ export default {
     };
   },
   mounted() {
+    console.log(this.$cookies.get("session"))
+    if (this.$cookies.get("session") == null) {
+      this.$root.store.logout();
+      localStorage.clear();
+    }
     // console.log("mounted");
     this.cuisines.push(...cuisines);
     this.diet.push(...diet);
     this.intolerances.push(...intolerances);
     this.check_local_storage();
-    // console.log($v);
+  
   },
   methods: {
-    // validateState(param) {
-    //   const { $dirty, $error } = this.$v.form[param];
-    //   return $dirty ? !$error : null;
-    // },    
+   
     async url_Search(){
       let search_url="";
       
@@ -232,7 +234,10 @@ export default {
         }
         this.search_url_ = await this.url_Search();
         this.searchClicked = true;
-        this.$root.store.last_search(this.search_url_);
+        if (this.$cookies.get("session") != null) {
+          this.$root.store.last_search(this.search_url_);
+          }
+       
         
       } catch (err) {
         console.log(err.response);
@@ -263,7 +268,7 @@ export default {
       }; 
     },
     check_local_storage(){      
-      if(this.$root.store.search_url_){
+      if(this.$root.store.search_url_ && this.$cookies.get("session") != null){
         this.search_url_=this.$root.store.search_url_;
         this.searchClicked = true;
         // this.onSearch();

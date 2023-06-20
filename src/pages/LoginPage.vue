@@ -92,6 +92,12 @@ export default {
       }
     }
   },
+  mounted() {
+    if (this.$cookies.get("session") == null) {
+      this.$root.store.logout();
+      localStorage.clear();
+    }
+  },
   methods: {
     validateState(param) {
       const { $dirty, $error } = this.$v.form[param];
