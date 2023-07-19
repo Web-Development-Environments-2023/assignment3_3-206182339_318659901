@@ -3,7 +3,7 @@
     <br/>
 
     <div id="create-recipe-modal-content">
-        <b-modal id="modal-1"  ref="my-modal" title="Create New Recipe" hide-footer>
+        <b-modal id="modal-1" header-bg-variant="info" ref="my-modal" title="Create New Recipe" hide-footer>
     <b-form @submit.prevent="createRecipe" @reset.prevent="onReset">
       <!-- Image -->
       <b-form-group 
@@ -104,7 +104,7 @@
           v-model = "$v.form.prepInstructions.$model"
           type="text"
           :state="validateState('prepInstructions')"
-          placeholder = "Enter recipe Instructions.."
+          placeholder = "Enter recipe Instructions. for example: 1.mix the ingredients into bowl. 2.make small balls.."
           rows="4"
         >
         </b-form-textarea>
@@ -131,7 +131,7 @@
       <b-button class="btn-primary" type="reset" pill >Reset</b-button>
       <b-button
         pill type="submit"
-        class="btn-warning"
+        class="btn-info"
         >Create Recipe
       </b-button>
     </b-form>
