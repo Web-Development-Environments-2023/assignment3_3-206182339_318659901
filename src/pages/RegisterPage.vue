@@ -1,12 +1,21 @@
 <template>
   <div class="container">
-    <h1 class="title">Register</h1>
+    <br/>
+    <br/>
+    <h1 class="big-title text-center">Register</h1>
+    <br/>
+    <br/>
     <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+      
+      <!-- user name -->
+      
       <b-form-group
         id="input-group-username"
         label-cols-sm="3"
         label="Username:"
         label-for="username"
+        class="register-field"
+
       >
         <b-form-input
           id="username"
@@ -21,15 +30,63 @@
           Username length should be between 3-8 characters long
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!$v.form.username.alpha">
-          Username alpha
+          Username must be alphabetical
         </b-form-invalid-feedback>
       </b-form-group>
+    <!-- firstName -->
+      <b-form-group
+        id="input-group-firstName"
+        label-cols-sm="3"
+        label="first Name:"
+        label-for="firstName"
+        class="register-field"
+        
+      >
+      <b-form-input
+          id="firstName"
+          v-model="$v.form.firstName.$model"
+          type="text"
+          :state="validateState('firstName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.required">
+          firstName is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.alpha">
+          firstName must be alphabetical
+        </b-form-invalid-feedback>
+      </b-form-group>   
 
+      <!-- lastNam -->
+      <b-form-group
+        id="input-group-firstName"
+        label-cols-sm="3"
+        label="last Name:"
+        label-for="lastName"
+        class="register-field"
+
+      >
+        <b-form-input
+          id="lastName"
+          v-model="$v.form.lastName.$model"
+          type="text"
+          :state="validateState('lastName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.required">
+          lastName is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.alpha">
+          lastName must be alphabetical
+        </b-form-invalid-feedback>
+      </b-form-group>  
+
+      <!-- country -->
       <b-form-group
         id="input-group-country"
         label-cols-sm="3"
         label="Country:"
         label-for="country"
+        class="register-field"
+
       >
         <b-form-select
           id="country"
@@ -41,12 +98,39 @@
           Country is required
         </b-form-invalid-feedback>
       </b-form-group>
+    <!-- email -->
 
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="email:"
+        label-for="email"
+        class="register-field"
+
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          type="email"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          email is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-else-if="!$v.form.email.validEmail">
+          'Valid email required.'
+        </b-form-invalid-feedback>
+      </b-form-group>      
+
+
+      <!-- Password -->
       <b-form-group
         id="input-group-Password"
         label-cols-sm="3"
         label="Password:"
         label-for="password"
+        class="register-field"
+
       >
         <b-form-input
           id="password"
@@ -58,21 +142,24 @@
           Password is required
         </b-form-invalid-feedback>
         <b-form-text v-else-if="$v.form.password.$error" text-variant="info">
-          Your password should be <strong>strong</strong>. <br />
-          For that, your password should be also:
+         
         </b-form-text>
         <b-form-invalid-feedback
-          v-if="$v.form.password.required && !$v.form.password.length"
+          v-if="$v.form.password.required || !$v.form.password.length || !$v.form.password.specialChar || !$v.form.password.digit"
         >
-          Have length between 5-10 characters long
+          Your password should be <strong style="color:blue">strong</strong>. <br />
+          For that, your password should have length between 5-10 characters long and least one special character
         </b-form-invalid-feedback>
       </b-form-group>
 
+      <!-- confirmedPassword -->
       <b-form-group
         id="input-group-confirmedPassword"
         label-cols-sm="3"
         label="Confirm Password:"
         label-for="confirmedPassword"
+        class="register-field"
+
       >
         <b-form-input
           id="confirmedPassword"
@@ -90,14 +177,12 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button class="btn-primary" type="reset" pill >Reset</b-button>
+      <!-- <b-button @click="Register" -->
       <b-button
-        type="submit"
-        variant="primary"
-        style="width:250px;"
-        class="ml-5 w-75"
-        >Register</b-button
-      >
+        pill type="submit"
+        class="btn-warning"
+        >Register</b-button>
       <div class="mt-2">
         You have an account already?
         <router-link to="login"> Log in here</router-link>
@@ -106,16 +191,12 @@
     <b-alert
       class="mt-2"
       v-if="form.submitError"
-      variant="warning"
+      pill variant="warning"
       dismissible
-      show
-    >
+      show>
       Register failed: {{ form.submitError }}
     </b-alert>
-    <!-- <b-card class="mt-3 md-3" header="Form Data Result">
-      <pre class="m-0"><strong>form:</strong> {{ form }}</pre>
-      <pre class="m-0"><strong>$v.form:</strong> {{ $v.form }}</pre>
-    </b-card> -->
+
   </div>
 </template>
 
@@ -159,9 +240,25 @@ export default {
       country: {
         required
       },
+      firstName: {
+        required,
+        alpha
+      },
+      lastName:{
+        required,
+        alpha
+      },
+      email:{
+        required,
+        email,
+      },
       password: {
         required,
-        length: (p) => minLength(5)(p) && maxLength(10)(p)
+        length: (p) => minLength(5)(p) && maxLength(10)(p),
+        specialChar: (p) => p && /[^A-Za-z0-9]/.test(p), 
+        digit: (p) => p && /\d/.test(p), 
+        
+
       },
       confirmedPassword: {
         required,
@@ -184,12 +281,17 @@ export default {
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
           this.$root.store.server_domain + "/Register",
-
           {
             username: this.form.username,
-            password: this.form.password
+            firstname: this.form.firstName,
+            lastname: this.form.lastName,
+            country: this.form.country,
+            password: this.form.password,
+            confirmation_password: this.form.confirmation_password,
+            email: this.form.email,
           }
         );
+        // moves to login rout right after registration 
         this.$router.push("/login");
         // console.log(response);
       } catch (err) {
@@ -223,8 +325,55 @@ export default {
   }
 };
 </script>
+
+
 <style lang="scss" scoped>
 .container {
+
+  max-width: 550px;
+  // background-color: #EFEFEF;
+  border-radius: 25px;
+  // border-style: solid;
+  // border-color: darkgrey;
+  // padding: 20px;
   max-width: 500px;
+}
+
+.big-title{
+  font-family:"Papyrus";
+  font-size: 48px;
+  color:#0f4e9f;
+  font-weight: bolder;
+}
+.btn-warning{
+  width:55%;
+  font-family:"Papyrus";
+  padding: 15px 20px;
+  background-color: #587aea;
+  border-color: #9cc1f1;
+  font-weight: bold;
+  color: #080807;
+  margin: 15px 15px 20px 80px;
+}
+.btn-primary{
+  width:20%;
+  font-family:"Papyrus";
+  padding: 15px 20px;
+  font-weight: bold;
+  color: #080807;
+}
+.register-field {
+  color: black;
+  // font-weight: bolder;
+    font-family:"Papyrus";
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    word-spacing: -0.4px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
 }
 </style>

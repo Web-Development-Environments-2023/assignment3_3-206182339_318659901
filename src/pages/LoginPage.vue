@@ -1,12 +1,17 @@
 <template>
   <div class="container">
-    <h1 class="title">Login</h1>
+    <br/>
+    <br/>
+    <h1 class="big-title text-center">Login</h1>
+    <br/>
+    <br/>
     <b-form @submit.prevent="onLogin">
       <b-form-group
         id="input-group-Username"
         label-cols-sm="3"
         label="Username:"
         label-for="Username"
+        class="login-field"
       >
         <b-form-input
           id="Username"
@@ -24,6 +29,8 @@
         label-cols-sm="3"
         label="Password:"
         label-for="Password"
+        class="login-field"
+
       >
         <b-form-input
           id="Password"
@@ -38,14 +45,13 @@
 
       <b-button
         type="submit"
-        variant="primary"
-        style="width:100px;display:block;"
-        class="mx-auto w-100"
+        class="btn-warning"
+        pill
         >Login</b-button
       >
       <div class="mt-2">
         Do not have an account yet?
-        <router-link to="register"> Register in here</router-link>
+        <router-link pill to="register"> Register in here</router-link>
       </div>
     </b-form>
     <b-alert
@@ -86,6 +92,12 @@ export default {
       }
     }
   },
+  mounted() {
+    if (this.$cookies.get("session") == null) {
+      this.$root.store.logout();
+      localStorage.clear();
+    }
+  },
   methods: {
     validateState(param) {
       const { $dirty, $error } = this.$v.form[param];
@@ -107,7 +119,7 @@ export default {
         );
         // console.log(response);
         // this.$root.loggedIn = true;
-        console.log(this.$root.store.login);
+        // console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
         this.$router.push("/");
       } catch (err) {
@@ -129,8 +141,50 @@ export default {
   }
 };
 </script>
+
+
+
 <style lang="scss" scoped>
 .container {
-  max-width: 400px;
+
+  max-width: 550px;
+  // background-color: #EFEFEF;
+  border-radius: 25px;
+  // border-style: solid;
+  // border-color: darkgrey;
+  // padding: 20px;
+  max-width: 500px;
+}
+
+.big-title{
+  font-family:"Papyrus";
+  font-size: 48px;
+  color:#0f4e9f;
+  font-weight: bolder;
+}
+.login-field {
+    color: black;
+  // font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    word-spacing: -0.4px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.btn-warning{
+  background-color: #587aea;
+  border-color: #9cc1f1;
+  font-family:"Papyrus";
+  font-weight: bold;
+  color: #080807;
+  width:100%;
+  display:block;
+
 }
 </style>

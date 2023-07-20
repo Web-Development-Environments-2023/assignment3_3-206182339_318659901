@@ -3,6 +3,7 @@ import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
 import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
@@ -10,6 +11,11 @@ const router = new VueRouter({
   routes,
 });
 
+;import VueCookies from "vue-cookies"
+;Vue.use(VueCookies)
+import VueScrollFixedNavbar from "vue-scroll-fixed-navbar";
+
+Vue.use(VueScrollFixedNavbar);
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -24,6 +30,12 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  FormRadioPlugin,
+  ModalPlugin,
+  FormCheckboxPlugin,
+  FormTextareaPlugin,
+  ListGroupPlugin,
+  CarouselPlugin,
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -36,6 +48,13 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  FormRadioPlugin,
+  FormCheckboxPlugin,
+  ModalPlugin,
+  FormTextareaPlugin,
+  ListGroupPlugin,
+  CarouselPlugin,
+
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
@@ -68,6 +87,8 @@ Vue.config.productionTip = false;
 
 const shared_data = {
   username: localStorage.username,
+  server_domain: "http://localhost:3000",
+  search_url_: localStorage.search_url_,
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -77,6 +98,11 @@ const shared_data = {
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
+  },
+  last_search(search_url){
+    localStorage.setItem("search_url_", search_url);
+    this.search_url_ = search_url;
+    console.log("last search");
   },
 };
 console.log(shared_data);
@@ -103,3 +129,6 @@ new Vue({
   },
   render: (h) => h(App),
 }).$mount("#app");
+    // "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    // "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+    // "lint": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service lint"
