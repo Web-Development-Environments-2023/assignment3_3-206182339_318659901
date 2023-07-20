@@ -5,8 +5,8 @@ Michal Alhindi, Sean Hacmon.
 ## Summary:
 Ben Gurion University Software and Information Systems Engineering, Web development course Project.
 First, We have created An API YAML file.
-Second, We have developed Backend by the API file we wrote, by using an external API source (spoonacular) and a DB.
-Third, we have developed Frontend that by picking up a server on a remote desktop and using our backend we created a website of recipes.
+Second, We have developed Backend by the API file we wrote, using NodeJS and express library, and using an external API source (spoonacular) and a DB.
+Third, we have developed Frontend using VueJS, by picking up a server on a remote desktop and using our backend we created a website of recipes.
 
 ## Home Page
 #### In our home page you can find a few random recipes and those you were last viewed.
@@ -26,8 +26,8 @@ Third, we have developed Frontend that by picking up a server on a remote deskto
 #### A page in "My Area" tab that shows all the recipes that have been created by the current user logged in.
 <img src="https://github.com/Web-Development-Environments-2023/assignment3_3-206182339_318659901/assets/100718234/b8cb0de2-ee75-4548-b42a-e88121c83be9" width=700 height=350>
 
-## My Family Recipes
-#### A page in "My Area" tab that shows all the family recipes of the current user logged in.
+## Full Recipe Details
+#### After clicking on a recipe, you can see the recipe picture, details on the dish, ingredients and instructions below. You also have a button "add to favorites" so you can keep the recipe.
 <img src="https://github.com/Web-Development-Environments-2023/assignment3_3-206182339_318659901/assets/100718234/c5500f06-2041-4893-b6e8-e129c5d74fb0" width=700 height=350>
 
 
